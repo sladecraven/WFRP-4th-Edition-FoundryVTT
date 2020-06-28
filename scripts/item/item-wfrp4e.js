@@ -258,11 +258,11 @@ class ItemWfrp4e extends Item
     chatData.hasPrice = "price" in chatData.data;
     if(chatData.hasPrice)
     {
-      if(isNaN(chatData.data.price.gc))
+      if(!chatData.data.price.gc || isNaN(chatData.data.price.gc || 0))
         chatData.data.price.gc = 0;
-      if(isNaN(chatData.data.price.ss))
+      if(!chatData.data.price.ss || isNaN(chatData.data.price.ss || 0))
         chatData.data.price.ss = 0;
-      if(isNaN(chatData.data.price.bp))
+      if(!chatData.data.price.bp || isNaN(chatData.data.price.bp))
         chatData.data.price.bp = 0;
     }
 
@@ -343,7 +343,7 @@ class ItemWfrp4e extends Item
   {
     const data = duplicate(this.data.data);
     let properties = [];
-    properties.push(`<b>${game.i18n.localize("Contraction")}:</b> data.contraction.value`);
+    properties.push(`<b>${game.i18n.localize("Contraction")}:</b> ${data.contraction.value}`);
     properties.push(`<b>${game.i18n.localize("Incubation")}:</b> <a class = 'chat-roll'><i class='fas fa-dice'></i> ${data.incubation.value}</a>`);
     properties.push(`<b>${game.i18n.localize("Duration")}:</b> <a class = 'chat-roll'><i class='fas fa-dice'></i> ${data.duration.value}</a>`);
     properties.push(`<b>${game.i18n.localize("Symptoms")}:</b> ${(data.symptoms.value.split(",").map(i => i = "<a class ='symptom-tag'><i class='fas fa-user-injured'></i> " + i.trim() + "</a>")).join(", ")}`);
